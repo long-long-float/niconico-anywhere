@@ -25,5 +25,5 @@ build/Release
 node_modules
 
 app.js
-public/show.js
 public/post.js
+bookmarklet/bookmarklet.js

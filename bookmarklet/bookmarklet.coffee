@@ -19,7 +19,7 @@ messages_buf = []
 #load socket.io
 loadScript 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js', ->
   #receive message
-  socket = io.connect("http://niconico-learning.herokuapp.com:80")
+  socket = io.connect("http://#{window.niconico_anywhere_host ? "niconico-learning.herokuapp.com:80"}")
   socket.on 'new-message', (msg) ->
     messages_buf.push msg
 
