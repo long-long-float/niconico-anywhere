@@ -26,7 +26,8 @@ loadScript 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.mi
 messages = []
 
 #loop
-wwidth = wheight = 500
+wwidth = document.documentElement.clientWidth
+wheight = document.documentElement.clientHeight
 setInterval (->
   for msg in messages_buf
     element = document.createElement('div')
