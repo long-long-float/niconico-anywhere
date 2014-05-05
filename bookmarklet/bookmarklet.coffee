@@ -31,7 +31,15 @@ wheight = document.documentElement.clientHeight
 setInterval (->
   for msg in messages_buf
     element = document.createElement('div')
-    element.style.position = 'absolute'
+    s = element.style
+    s.position = 'absolute'
+    s.fontFamily = 'MS P ゴシック'
+    s.fontSize = '30px'
+    #s.fontWeight = 'bold'
+    s.color = 'white'
+    s.textShadow = 
+      '1px 1px 1px #000, -1px 1px 1px #000, 
+      1px -1px 1px #000, -1px -1px 1px #000'
     element.textContent = msg.content
     document.body.appendChild element
     messages.push
