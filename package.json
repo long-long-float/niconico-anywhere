@@ -1,0 +1,15 @@
+{
+  "name": "niconico-learning",
+  "version": "0.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "long_long_float",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^0.9.16",
+    "connect": "^2.14.5",
+    "node-dev": "^2.3.0"
+  }
+}
