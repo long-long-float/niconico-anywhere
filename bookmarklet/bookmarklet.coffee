@@ -23,42 +23,35 @@ loadScript 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.mi
   socket.on 'new-message', (msg) ->
     messages_buf.push msg
 
-#create canvas
-canvas = document.createElement('canvas')
-canvas.width = canvas.height = 500
-canvas.style.left = canvas.style.top = '0px'
-canvas.style.position = 'absolute'
-document.body.appendChild(canvas)
-context = canvas.getContext('2d')
-
 messages = []
-context.font = '20px Arial'
-context.fillStyle = 'black'
 
 #loop
-width = canvas.width
-height = canvas.height
+wwidth = wheight = 500
 setInterval (->
-  context.clearRect(0, 0, width, height)
-
   for msg in messages_buf
-    msg.x = width
-    msg.y = 10 + height * Math.random() - 10
-    msg.vx = -1 + (-4 * Math.random())
-    msg.vy = 0
-    msg.width = context.measureText(msg.content).width
-    messages.push msg
+    element = document.createElement('div')
+    element.style.position = 'absolute'
+    element.textContent = msg.content
+    document.body.appendChild element
+    messages.push
+      x: wwidth, y: 10 + wheight * Math.random() - 10
+      vx: -1 + (-4 * Math.random()), vy: 0
+      element: element
   messages_buf = []
 
   remove_list = []
   for msg, i in messages
-    context.fillText(msg.content, msg.x, msg.y)
+    s = msg.element.style
+    s.left = "#{msg.x}px"
+    s.top = "#{msg.y}px"
 
     msg.x += msg.vx
     msg.y += msg.vy
-    if msg.x + msg.width < 0
-      remove_list.push i
+    if msg.x + msg.element.clientWidth < 0
+      remove_list.push [i, msg.element]
 
-  for index in remove_list
+  for [index, element] in remove_list
     messages.splice(index, 1)
+    element.parentNode.removeChild(element)
+
   ), 1000 / 30
